@@ -77,7 +77,8 @@ while wallet > 0:
     while bet < 1 or bet > 50:
         try:
             bet = int(input("\nChoose a number between 1 and 50 to bet on\n"))
-        except ValueError: 
+        except ValueError:
+            print("Invalid value") 
             continue
 
     betamount = 0
