@@ -2,7 +2,7 @@
 
 """
 This module displays a roulette game. The player is asked to choose a number between 
-0 and 50 and make a money bet. A random number is drawn and the player wins or 
+1 and 50 and make a bet. A random number is picked and the player wins or 
 loses money according to the game rules. 
 
 Example:
@@ -10,9 +10,9 @@ Example:
     
 Attributes:
     number(int): the number between 1 and 50 on which the player bets
-    ball(int): the winning number picked randomly between 0 and 50
+    ball(int): the winning number picked randomly between 1 and 50
     wallet(int): the money available for the player to bet, equals 100$ at the beginning of the game
-    bet(int): the money bet by the player on a round
+    bet(int): the money bet by the player on a number
     history(list): the previous winning numbers
 
 """
@@ -29,7 +29,7 @@ import argparse
 
 def givecolor(number):
     """
-    Returns color of a given number according to the game rules   
+    Returns the color of a given number according to the game rules   
 
         Args:
             number: integer between 1 and 50
@@ -57,7 +57,7 @@ args = parser.parse_args()
 
 time.sleep(1)
 
-#*****pour ne pas avoir à mettre des "if args / if input" tout au long du code*****
+#pour ne pas avoir à mettre des "if args / if input" tout au long du code*****
 if args.number:
     number = args.number
     bet = args.bet
@@ -70,11 +70,9 @@ print(f"\nHello {getpass.getuser()}")
 time.sleep(1)
 
 while wallet > 0:
-
     ball = random.randrange(1,50)
 
     if args.number == None: 
-        
         retry = ""
         if history == []:
             print(f"\nYou have {math.ceil(wallet)}$\n")
@@ -137,11 +135,13 @@ while wallet > 0:
         else:
             print ("\n==> You lose your bet\n")
 
-#car si args pas de possibilité de rejouer
+#si args, pas de possibilité de rejouer
     if args.number:
         time.sleep(2)
         print(f"You now have {math.ceil(wallet)}$\n")
-        time.sleep(3)
+        time.sleep(2)
+        print("Bye\n")
+        time.sleep(2)
         exit()
     
 print("You're broke. Out!")
