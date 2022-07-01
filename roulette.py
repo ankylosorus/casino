@@ -9,10 +9,10 @@ Example:
     $ python casino.py --number 44 --bet 75
     
 Attributes:
-    bet(int): the number between 1 and 50 on which the player bets
+    number(int): the number between 1 and 50 on which the player bets
     ball(int): the winning number picked randomly between 0 and 50
     wallet(int): the money available for the player to bet, equals 100$ at the beginning of the game
-    betamount(int): the money bet by the player on a round
+    bet(int): the money bet by the player on a round
     history(list): the previous winning numbers
 
 """
@@ -59,11 +59,11 @@ time.sleep(1)
 
 #*****pour ne pas avoir à mettre des "if args / if input" tout au long du code*****
 if args.number:
-    bet = args.number
-    betamount = args.bet
+    number = args.number
+    bet = args.bet
 else:
+    number = 0
     bet = 0
-    betamount = 0
 
 print(f"\nHello {getpass.getuser()}")
 
@@ -93,26 +93,26 @@ while wallet > 0:
             elif retry == "y":
                 break
 
-        bet = 0
-        while bet < 1 or bet > 50:
+        number = 0
+        while number < 1 or number > 50:
             try:
-                bet = int(input("\nChoose a number between 1 and 50 to bet on\n"))
+                number = int(input("\nChoose a number between 1 and 50 to bet on\n"))
             except ValueError:
                 print("Invalid value") 
                 continue
             
-        betamount = 0
-        while betamount < 1 or betamount > wallet:
+        bet = 0
+        while bet < 1 or bet > wallet:
             try:    
-                betamount = int(input(f"\nHow much do you want to bet on {bet} ({givecolor(bet)})?\n"))
-                if betamount == wallet:
-                    print("! ALL IN !")
+                bet = int(input(f"\nHow much do you want to bet on {number} ({givecolor(number)})?\n"))
+                if bet == wallet:
+                    print("!!! ALL IN !!!")
             except ValueError:
                 continue
-            if betamount > wallet:
+            if bet > wallet:
                 print("You do not have enough in your wallet")
 
-    print(f"\nYou bet {betamount}$ on {bet} ({givecolor(bet)})\n")
+    print(f"\nYou bet {bet}$ on {number} ({givecolor(number)})\n")
 
     time.sleep(1)
 
@@ -126,29 +126,18 @@ while wallet > 0:
 
     time.sleep(2)
 
-    if ball == bet:
-        wallet = wallet + betamount*4
+    if ball == number:
+        wallet = wallet + bet*4
         print("Well done. You win 3 times your bet\n")
     else:
-        wallet = wallet - betamount
-        if givecolor(ball) == givecolor(bet):
+        wallet = wallet - bet
+        if givecolor(ball) == givecolor(number):
             print("\n==> Missed... but you guessed the color, you win half your bet\n")
-            wallet = wallet + betamount*1.5
+            wallet = wallet + bet*1.5
         else:
             print ("\n==> You lose your bet\n")
 
-    # if ball == bet:
-    #     wallet = wallet + betamount*4
-    # else:
-    #     wallet = wallet - betamount
-    #     if givecolor(ball) == givecolor(bet):
-    #         wallet = wallet + betamount*1.5
-            
-    # time.sleep(1)
-
-    # print(result(bet, betamount))
-
-#car si args, pas de possibilité de rejouer
+#car si args pas de possibilité de rejouer
     if args.number:
         time.sleep(2)
         print(f"You now have {math.ceil(wallet)}$\n")
@@ -157,7 +146,7 @@ while wallet > 0:
     
 print("You're broke. Out!")
 
-time.sleep(1)
+time.sleep(2)
 
 exit()
 
