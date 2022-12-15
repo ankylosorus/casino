@@ -49,9 +49,11 @@ history = []
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-number", help="on which number you set your bet", type=int) 
+#parser.add_argument("-number", help="on which number you set your bet", type=int) 
+parser.add_argument("number", help="on which number you set your bet", type=int) 
 
-parser.add_argument("-bet", help="how much dollars you wish to bet", type=int)
+#parser.add_argument("-bet", help="how much dollars you wish to bet", type=int)
+parser.add_argument("bet", help="how much dollars you wish to bet", type=int)
 
 args = parser.parse_args()
 
